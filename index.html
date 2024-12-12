@@ -18,31 +18,35 @@
 
     function openGameWindow(gameNumber) {
       return function() {
-        // Abre la ventana emergente (pop-up) y la prepara con el contenido
-        var win = window.open("", "gameWindow", "width=800,height=600,resizable=yes,scrollbars=yes");
-
-        // Asegúrate de que la ventana se haya abierto
+        var win;
         if (win) {
-          // Escribe el contenido dentro de la ventana emergente (pop-up)
-          win.document.write('<!DOCTYPE html>');
-          win.document.write('<html lang="es">');
-          win.document.write('<head>');
-          win.document.write('<meta charset="UTF-8">');
-          win.document.write('<meta name="viewport" content="width=device-width, initial-scale=1.0">');
-          win.document.write('<title>Pop-up con iframe</title>');
-          win.document.write('</head>');
-          win.document.write('<body style="margin: 0; height: 100vh;">');
+          win.focus();
+        } else {
+          // Abre un pop-up con un tamaño específico
+          win = window.open("", "gameWindow", "width=800,height=600"); // Tamaño del pop-up
+
+          // Modifica el contenido del pop-up
+          win.document.body.style.margin = '0';
+          win.document.body.style.height = '100vh';
           
-          // Crear un iframe y asignar la URL del juego
           var iframe = win.document.createElement('iframe');
-          iframe.src = gameUrls[gameNumber - 1];
           iframe.style.border = 'none';
           iframe.style.width = '100%';
           iframe.style.height = '100%';
+          iframe.style.margin = '0';
+          
+          // Asigna la URL del juego al iframe
+          iframe.src = gameUrls[gameNumber - 1]; 
+          
+          // Agrega el iframe al pop-up
           win.document.body.appendChild(iframe);
 
-          // Cierra el documento del pop-up para que se renderice el contenido
-          win.document.close();
+          var interval = setInterval(function() {
+            if (win.closed) {
+              clearInterval(interval);
+              win = undefined;
+            }
+          }, 500);
         }
       };
     }
@@ -56,5 +60,7 @@
     });
   </script>
 
+  <script>gadgets.util.runOnLoadHandlers();</script>
+  <script>window.google.csi.tickDl();</script>
 </body>
 </html>
