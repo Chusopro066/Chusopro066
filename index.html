@@ -28,10 +28,10 @@
                 return;
             }
 
-            // Ahora, en lugar de usar document.write() inmediatamente, construimos el contenido HTML manualmente.
+            // Ahora, vamos a escribir el contenido HTML dentro de la ventana emergente
             var popupDocument = popupWindow.document;
 
-            // Inicia la escritura del contenido HTML
+            // Escribimos el contenido HTML
             popupDocument.open();
             popupDocument.write(`
                 <!DOCTYPE html>
@@ -79,7 +79,7 @@
                                 gameInstance.progress = progress.querySelector(".full");
                                 loader.querySelector(".spinner").style.display = "none";
                             }
-                            gameInstance.progress.style.transform = `scaleX(${progress})`;
+                            gameInstance.progress.style.transform = \`scaleX(\${progress})\`;
                             if (progress === 1 && !gameInstance.removeTimeout) {
                                 loader.style.display = "none";
                             }
@@ -99,15 +99,12 @@
                 </body>
                 </html>
             `);
-
-            // Finaliza la escritura del contenido
+            // Cierra el documento en la ventana emergente para que se procese
             popupDocument.close();
         }
 
-        // Asigna la función de abrir el juego al botón al cargar la página
-        document.addEventListener('DOMContentLoaded', function () {
-            document.getElementById('openGameButton').addEventListener('click', openGamePopup);
-        });
+        // Asigna la función de abrir el juego al botón
+        document.getElementById('openGameButton').addEventListener('click', openGamePopup);
     </script>
 </body>
 </html>
