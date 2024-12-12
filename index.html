@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="utf-8">
-    <title>1v1 LOL - topVAZ #3</title>
+    <title>1v1 Nacho</title>
     <meta name="robots" content="noindex, nofollow">
     <link rel="icon" type="image/png" href="favicon.png?v2">
     <meta property="og:title" content="1v1.LOL">
@@ -28,9 +28,10 @@
                 return;
             }
 
-            // Crea el contenido HTML de la ventana emergente
+            // Ahora, en lugar de usar document.write() inmediatamente, construimos el contenido HTML manualmente.
             var popupDocument = popupWindow.document;
 
+            // Inicia la escritura del contenido HTML
             popupDocument.open();
             popupDocument.write(`
                 <!DOCTYPE html>
@@ -98,7 +99,7 @@
                 </body>
                 </html>
             `);
-            popupDocument.close();
+            popupDocument.close(); // Aquí, ahora es seguro cerrar el documento
         }
 
         // Asigna la función de abrir el juego al botón
