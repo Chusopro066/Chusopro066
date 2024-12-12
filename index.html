@@ -18,31 +18,32 @@
 
     function openGameWindow(gameNumber) {
       return function() {
-        var win = window.open("about:blank", "gameWindow", "width=800,height=600");
+        // Abre la ventana emergente (pop-up) y la prepara con el contenido
+        var win = window.open("", "gameWindow", "width=800,height=600,resizable=yes,scrollbars=yes");
 
-        // Esperar un poco para asegurarse de que la ventana se ha abierto
-        win.document.write('<!DOCTYPE html>');
-        win.document.write('<html lang="es">');
-        win.document.write('<head>');
-        win.document.write('<meta charset="UTF-8">');
-        win.document.write('<meta name="viewport" content="width=device-width, initial-scale=1.0">');
-        win.document.write('<title>Pop-up con iframe</title>');
-        win.document.write('</head>');
-        win.document.write('<body style="margin: 0; height: 100vh;">');
-        
-        // Crear un iframe con el contenido
-        var iframe = win.document.createElement('iframe');
-        iframe.src = gameUrls[gameNumber - 1];
-        iframe.style.border = 'none';
-        iframe.style.width = '100%';
-        iframe.style.height = '100%';
-        win.document.body.appendChild(iframe);
-        
-        win.document.write('</body>');
-        win.document.write('</html>');
+        // Asegúrate de que la ventana se haya abierto
+        if (win) {
+          // Escribe el contenido dentro de la ventana emergente (pop-up)
+          win.document.write('<!DOCTYPE html>');
+          win.document.write('<html lang="es">');
+          win.document.write('<head>');
+          win.document.write('<meta charset="UTF-8">');
+          win.document.write('<meta name="viewport" content="width=device-width, initial-scale=1.0">');
+          win.document.write('<title>Pop-up con iframe</title>');
+          win.document.write('</head>');
+          win.document.write('<body style="margin: 0; height: 100vh;">');
+          
+          // Crear un iframe y asignar la URL del juego
+          var iframe = win.document.createElement('iframe');
+          iframe.src = gameUrls[gameNumber - 1];
+          iframe.style.border = 'none';
+          iframe.style.width = '100%';
+          iframe.style.height = '100%';
+          win.document.body.appendChild(iframe);
 
-        // Cierra el documento del pop-up para aplicar los cambios
-        win.document.close();
+          // Cierra el documento del pop-up para que se renderice el contenido
+          win.document.close();
+        }
       };
     }
 
@@ -55,7 +56,5 @@
     });
   </script>
 
-  <script>gadgets.util.runOnLoadHandlers();</script>
-  <script>window.google.csi.tickDl();</script>
 </body>
 </html>
