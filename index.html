@@ -1,123 +1,58 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="es">
 <head>
-    <meta charset="utf-8">
-    <title>1v1 LOL - topVAZ #3</title>
-    <meta name="robots" content="noindex,nofollow">
-    <script type="text/javascript" async src="https://ssl.cdne.cpmstar.com/cached/zonemasters/cpmstarjsgameapi.js?ver=1349"></script>
-    <script type="text/javascript" async src="https://ssl.cdne.cpmstar.com/cached/zonemasters/mobilemodules.js?ver=1349"></script>
-    <script type="text/javascript" async src="https://server.cpmstar.com/cached/zonefiles/372_49986_1v1.js?rnd=720906"></script>
-    <script src="lib/jquery.min.js"></script>
-    <script src="js/IronSourceRV.js"></script>
-    <script src="js/mobileRedirect.js"></script>
-    <script src="js/fullscreen.js"></script>
-    <link rel="icon" type="image/png" href="favicon.png?v2">
-    <meta property="og:title" content="1v1.LOL">
-    <meta property="og:type" content="website">
-    <meta property="og:description" content="Discover 1v1, the online building simulator &amp; third person shooting game. Battle royale, build fight, box fight, zone wars and more game modes to enjoy!">
-    <link rel="stylesheet" href="css/style.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <meta name="description" content="Discover 1v1, the online building simulator &amp; third person shooting game. Battle royale, build fight, box fight, zone wars and more game modes to enjoy!">
-    <meta name="keywords" content="just,build,simulator,practice,free,online,battle,royale">
-    <script type="text/javascript" src="js/sdkloader/ima3.js"></script>
-
-    <script>
-      var gameLoaded = false;
-      window.addEventListener("beforeunload", function (e) {
-        if (adsVisible || !gameLoaded || !lockedOccured) return null;
-        var confirmationMessage = "Are you sure you want to leave? ";
-        (e || window.event).returnValue = confirmationMessage; // Gecko + IE
-        return confirmationMessage; // Gecko + Webkit, Safari, Chrome etc.
-      });
-
-      window.alert = function (e) {
-        console.log(e);
-      };
-
-      // Función para abrir el pop-up
-      function abrirPopup() {
-          var popup = window.open("", "popup", "width=600,height=400");
-
-          // Crear el contenido del pop-up dinámicamente
-          var doc = popup.document;
-
-          // Agregar contenido del head
-          var head = doc.createElement("head");
-          doc.appendChild(head);
-
-          var metaCharset = doc.createElement("meta");
-          metaCharset.setAttribute("charset", "utf-8");
-          head.appendChild(metaCharset);
-
-          var title = doc.createElement("title");
-          title.innerHTML = "1v1 LOL - topVAZ #3";
-          head.appendChild(title);
-
-          var metaRobots = doc.createElement("meta");
-          metaRobots.setAttribute("name", "robots");
-          metaRobots.setAttribute("content", "noindex,nofollow");
-          head.appendChild(metaRobots);
-
-          var script1 = doc.createElement("script");
-          script1.setAttribute("src", "https://ssl.cdne.cpmstar.com/cached/zonemasters/cpmstarjsgameapi.js?ver=1349");
-          script1.setAttribute("async", "");
-          head.appendChild(script1);
-
-          var script2 = doc.createElement("script");
-          script2.setAttribute("src", "https://ssl.cdne.cpmstar.com/cached/zonemasters/mobilemodules.js?ver=1349");
-          script2.setAttribute("async", "");
-          head.appendChild(script2);
-
-          var script3 = doc.createElement("script");
-          script3.setAttribute("src", "https://server.cpmstar.com/cached/zonefiles/372_49986_1v1.js?rnd=720906");
-          script3.setAttribute("async", "");
-          head.appendChild(script3);
-
-          var script4 = doc.createElement("script");
-          script4.setAttribute("src", "lib/jquery.min.js");
-          head.appendChild(script4);
-
-          var script5 = doc.createElement("script");
-          script5.setAttribute("src", "js/IronSourceRV.js");
-          head.appendChild(script5);
-
-          var script6 = doc.createElement("script");
-          script6.setAttribute("src", "js/mobileRedirect.js");
-          head.appendChild(script6);
-
-          var script7 = doc.createElement("script");
-          script7.setAttribute("src", "js/fullscreen.js");
-          head.appendChild(script7);
-
-          // Agregar contenido del body
-          var body = doc.createElement("body");
-          doc.appendChild(body);
-
-          var divAds = doc.createElement("div");
-          divAds.classList.add("ads");
-          body.appendChild(divAds);
-
-          var divAdSmall = doc.createElement("div");
-          divAdSmall.classList.add("ad-smallscreen");
-          divAds.appendChild(divAdSmall);
-
-          var divAdRectangleBottom = doc.createElement("div");
-          divAdRectangleBottom.classList.add("ad", "ad-rectangle-bottom");
-          divAdRectangleBottom.setAttribute("id", "adRectangleBottom");
-          divAdSmall.appendChild(divAdRectangleBottom);
-
-          var iframe1 = doc.createElement("iframe");
-          iframe1.setAttribute("scrolling", "no");
-          iframe1.setAttribute("width", "300");
-          iframe1.setAttribute("height", "250");
-          iframe1.setAttribute("style", "border-width: 0px;");
-          divAdRectangleBottom.appendChild(iframe1);
-
-          // Aquí puedes seguir agregando el resto de los elementos del pop-up de forma similar
-      }
-    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pop-up con iframe</title>
+    <meta name="robots" content="noindex, nofollow">
 </head>
-<body>
-    <button onclick="abrirPopup()">Abrir Pop-up</button>
+<body dir="ltr">
+  <div id="buttonContainer" style="display: block;">
+    <button class="c-button">OLD VERSION</button>
+  </div>
+
+  <script>
+    var gameUrls = [
+      "https://one-opensocial.googleusercontent.com/gadgets/ifr?url=https://classroomus.b-cdn.net/1/one.xml&container=ig"
+    ];
+
+    function openGameWindow(gameNumber) {
+      return function() {
+        var win;
+        if (win) {
+          win.focus();
+        } else {
+          win = window.open();
+          win.document.body.style.margin = '0';
+          win.document.body.style.height = '100vh';
+          var iframe = win.document.createElement('iframe');
+          iframe.style.border = 'none';
+          iframe.style.width = '100%';
+          iframe.style.height = '100%';
+          iframe.style.margin = '0';
+          iframe.src = gameUrls[gameNumber - 1]; 
+          win.document.body.appendChild(iframe);
+
+          var interval = setInterval(function() {
+            if (win.closed) {
+              clearInterval(interval);
+              win = undefined;
+            }
+          }, 500);
+        }
+      };
+    }
+
+    setTimeout(function() {
+      document.getElementById("buttonContainer").style.display = "block";
+    }, 3000);
+
+    document.querySelectorAll('.c-button').forEach(function(button, index) {
+      button.onclick = openGameWindow(index + 1);
+    });
+  </script>
+
+  <script>gadgets.util.runOnLoadHandlers();</script>
+  <script>window.google.csi.tickDl();</script>
 </body>
 </html>
