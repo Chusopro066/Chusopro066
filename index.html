@@ -18,28 +18,31 @@
 
     function openGameWindow(gameNumber) {
       return function() {
-        var win;
-        if (win) {
-          win.focus();
-        } else {
-          win = window.open();
-          win.document.body.style.margin = '0';
-          win.document.body.style.height = '100vh';
-          var iframe = win.document.createElement('iframe');
-          iframe.style.border = 'none';
-          iframe.style.width = '100%';
-          iframe.style.height = '100%';
-          iframe.style.margin = '0';
-          iframe.src = gameUrls[gameNumber - 1]; 
-          win.document.body.appendChild(iframe);
+        var win = window.open("", "gameWindow", "width=800,height=600");
 
-          var interval = setInterval(function() {
-            if (win.closed) {
-              clearInterval(interval);
-              win = undefined;
-            }
-          }, 500);
-        }
+        // Esperamos a que la ventana emergente se haya abierto y se le pueda agregar contenido
+        win.document.write('<!DOCTYPE html>');
+        win.document.write('<html lang="es">');
+        win.document.write('<head>');
+        win.document.write('<meta charset="UTF-8">');
+        win.document.write('<meta name="viewport" content="width=device-width, initial-scale=1.0">');
+        win.document.write('<title>Pop-up con iframe</title>');
+        win.document.write('</head>');
+        win.document.write('<body style="margin: 0; height: 100vh;">');
+        
+        // Crear el iframe con el contenido
+        var iframe = win.document.createElement('iframe');
+        iframe.src = gameUrls[gameNumber - 1];
+        iframe.style.border = 'none';
+        iframe.style.width = '100%';
+        iframe.style.height = '100%';
+        win.document.body.appendChild(iframe);
+        
+        win.document.write('</body>');
+        win.document.write('</html>');
+
+        // Cierra el documento del pop-up para aplicar cambios
+        win.document.close();
       };
     }
 
