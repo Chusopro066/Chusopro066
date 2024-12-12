@@ -18,35 +18,33 @@
 
     function openGameWindow(gameNumber) {
       return function() {
-        var win;
-        if (win) {
-          win.focus();
-        } else {
-          // Abre un pop-up con un tamaño específico
-          win = window.open("", "gameWindow", "width=800,height=600"); // Tamaño del pop-up
+        // Abre el pop-up solo cuando el usuario hace clic
+        var win = window.open("", "gameWindow", "width=800,height=600,resizable=yes,scrollbars=yes");
 
-          // Modifica el contenido del pop-up
-          win.document.body.style.margin = '0';
-          win.document.body.style.height = '100vh';
+        // Asegúrate de que la ventana se ha abierto
+        if (win) {
+          // Escribe el contenido de la ventana emergente
+          win.document.write('<!DOCTYPE html>');
+          win.document.write('<html lang="es">');
+          win.document.write('<head>');
+          win.document.write('<meta charset="UTF-8">');
+          win.document.write('<meta name="viewport" content="width=device-width, initial-scale=1.0">');
+          win.document.write('<title>Pop-up con iframe</title>');
+          win.document.write('</head>');
+          win.document.write('<body style="margin: 0; height: 100vh;">');
           
+          // Crear un iframe que carga la URL del juego
           var iframe = win.document.createElement('iframe');
+          iframe.src = gameUrls[gameNumber - 1];
           iframe.style.border = 'none';
           iframe.style.width = '100%';
           iframe.style.height = '100%';
-          iframe.style.margin = '0';
-          
-          // Asigna la URL del juego al iframe
-          iframe.src = gameUrls[gameNumber - 1]; 
-          
-          // Agrega el iframe al pop-up
           win.document.body.appendChild(iframe);
-
-          var interval = setInterval(function() {
-            if (win.closed) {
-              clearInterval(interval);
-              win = undefined;
-            }
-          }, 500);
+          
+          // Cierra el documento para renderizar el contenido
+          win.document.close();
+        } else {
+          alert("¡No se pudo abrir el pop-up! Asegúrate de permitir ventanas emergentes.");
         }
       };
     }
@@ -60,7 +58,5 @@
     });
   </script>
 
-  <script>gadgets.util.runOnLoadHandlers();</script>
-  <script>window.google.csi.tickDl();</script>
 </body>
 </html>
