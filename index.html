@@ -18,9 +18,9 @@
 
     function openGameWindow(gameNumber) {
       return function() {
-        var win = window.open("", "gameWindow", "width=800,height=600");
+        var win = window.open("about:blank", "gameWindow", "width=800,height=600");
 
-        // Esperamos a que la ventana emergente se haya abierto y se le pueda agregar contenido
+        // Esperar un poco para asegurarse de que la ventana se ha abierto
         win.document.write('<!DOCTYPE html>');
         win.document.write('<html lang="es">');
         win.document.write('<head>');
@@ -30,7 +30,7 @@
         win.document.write('</head>');
         win.document.write('<body style="margin: 0; height: 100vh;">');
         
-        // Crear el iframe con el contenido
+        // Crear un iframe con el contenido
         var iframe = win.document.createElement('iframe');
         iframe.src = gameUrls[gameNumber - 1];
         iframe.style.border = 'none';
@@ -41,7 +41,7 @@
         win.document.write('</body>');
         win.document.write('</html>');
 
-        // Cierra el documento del pop-up para aplicar cambios
+        // Cierra el documento del pop-up para aplicar los cambios
         win.document.close();
       };
     }
