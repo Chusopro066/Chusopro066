@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="utf-8">
-    <title>1v1 Nacho</title>
+    <title>1v1 LOL - topVAZ #3</title>
     <meta name="robots" content="noindex, nofollow">
     <link rel="icon" type="image/png" href="favicon.png?v2">
     <meta property="og:title" content="1v1.LOL">
@@ -100,14 +100,14 @@
                 </html>
             `);
 
-            // Fin de la escritura del contenido
+            // Finaliza la escritura del contenido
             popupDocument.close();
         }
 
-        // Asigna la función de abrir el juego al botón
-        window.onload = function () {
+        // Asigna la función de abrir el juego al botón al cargar la página
+        document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('openGameButton').addEventListener('click', openGamePopup);
-        }
+        });
     </script>
 </body>
 </html>
