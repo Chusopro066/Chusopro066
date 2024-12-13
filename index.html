@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="1v1.LOL Game">
+    <meta name="author" content="Your Name">
+    <title>1v1.LOL Game</title>
+    
+    <!-- Firebase App (Core Firebase SDK) -->
+    <script src="firebase/firebase-app.js"></script>
+    <script src="firebase/firebase-analytics.js"></script>
+    <script src="firebase/firebase-auth.js"></script>
+    <script src="firebase/firebase-firestore.js"></script>
+    <script src="firebase/firebase-remote-config.js"></script>
+
+    <!-- Additional JavaScript Files -->
+    <script src="js/firebase.js?v=147"></script>
+    <script src="js/login.js?v=147"></script>
+    <script src="js/firebase-config.js?v=147"></script>
+
+    <!-- Unity and Game Scripts -->
+    <script src="js/windowResize.js"></script>
+    <script src="js/adblockManager.js"></script>
+    <script src="js/macUserAgent.js"></script>
+    <script src="js/visibilityChangeListener.js"></script>
+
+    <script>
+      // Initialize Firebase based on environment
+      var hostname = window.location.hostname;
+      if (hostname.indexOf("dev1v1") >= 0 || hostname.indexOf("dev.1v1") >= 0 || hostname.indexOf("test1v1") >= 0 || hostname.indexOf("test.1v1") >= 0 || hostname.indexOf("localhost") >= 0) {
+        initializeFireBaseDev();
+      } else {
+        initializeFireBase();
+      }
+      initRemoteConfig();
+
+      // Unity ready function
+      function onUnityReady() {
+        checkAdBlock();
+        sendConfig();
+      }
+
+      // Fix Mac User Agent
+      fixMacUserAgent();
+    </script>
+
+</head>
+<body>
+    <!-- Game Content Container -->
+    <div id="gameContainer" style="padding: 0px; margin: 0px; border: 0px; position: relative; background: rgb(0, 0, 0);">
+        <canvas id="canvas" width="507" height="297" style="width: 100%; height: 100%; cursor: default;"></canvas>
+    </div>
+
+    <!-- Loading Screen (if needed) -->
+    <div id="loader" style="display: none;">
+        <img class="logo" src="logo.png" alt="Logo">
+        <div class="spinner" style="display: none;"></div>
+        <div class="progress" style="display: block;">
+            <div class="full" style="transform: scaleX(1);"></div>
+        </div>
+    </div>
+
+    <!-- Firebase/Unity/Ads Integration Scripts -->
+    <script src="UnityLoader.js"></script>
+    <script>
+      var gameJsonUrl = "WebGL.json"; // Default game JSON URL
+      var hostname = window.location.hostname;
+      if (hostname.indexOf("dev1v1") >= 0 || hostname.indexOf("dev.1v1") >= 0 || hostname.indexOf("test1v1") >= 0 || hostname.indexOf("test.1v1") >= 0) {
+        let urlParams = new URLSearchParams(window.location.search);
+        let queryParam = urlParams.get("version");
+        if (queryParam !== undefined && queryParam !== null) {
+          gameJsonUrl = gameJsonUrl.replace(/[0-9][0-9]+/i, queryParam);
+        }
+      }
+      var gameInstance = UnityLoader.instantiate("gameContainer", gameJsonUrl, { onProgress: UnityProgress });
+      window.unityInstance = gameInstance;
+    </script>
+
+    <script>
+      // Unity Progress Loader
+      function UnityProgress(gameInstance, progress) {
+        if (!gameInstance.Module) return;
+        const loader = document.querySelector("#loader");
+        if (!gameInstance.progress) {
+          const progressElement = document.querySelector("#loader .progress");
+          progressElement.style.display = "block";
+          gameInstance.progress = progressElement.querySelector(".full");
+          loader.querySelector(".spinner").style.display = "none";
+        }
+        gameInstance.progress.style.transform = `scaleX(${progress})`;
+        if (progress === 1 && !gameInstance.removeTimeout) {
+          loader.style.display = "none";
+        }
+      }
+    </script>
+
+    <!-- Ad Script (example for CPMStar) -->
+    <script>
+      // Add ad logic here, similar to what you had previously (ad checks, injection, etc)
+    </script>
+
+</body>
+</html>
