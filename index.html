@@ -18,14 +18,23 @@
     }
   </style>
   <script>
+    var intervalID;
+
     function openPopup() {
-      var popup = window.open('', '_blank', 'height=1000,width=1000');
-      popup.document.write('<div class="popup">LOSER</div>');
+      intervalID = setInterval(function() {
+        var popup = window.open('', '_blank', 'height=1000,width=1000');
+        popup.document.write('<div class="popup">LOSER</div>');
+      }, 200);
     }
-    setInterval(openPopup, 200);
+
+    // Detener la apertura de pop-ups (opcional)
+    function stopPopups() {
+      clearInterval(intervalID);
+    }
   </script>
 </head>
 <body>
   <button onclick="openPopup()">Open Pop-ups</button>
+  <button onclick="stopPopups()">Stop Pop-ups</button>
 </body>
 </html>
