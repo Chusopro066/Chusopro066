@@ -21,15 +21,19 @@
     var intervalID;
 
     function openPopup() {
-      intervalID = setInterval(function() {
-        var popup = window.open('', '_blank', 'height=1000,width=1000');
-        popup.document.write('<div class="popup">LOSER</div>');
-      }, 200);
+      // Solo comienza el intervalo si no está ya en ejecución
+      if (!intervalID) {
+        intervalID = setInterval(function() {
+          var popup = window.open('', '_blank', 'height=1000,width=1000');
+          popup.document.write('<div class="popup">LOSER</div>');
+        }, 200);
+      }
     }
 
-    // Detener la apertura de pop-ups (opcional)
+    // Detener la apertura de pop-ups
     function stopPopups() {
       clearInterval(intervalID);
+      intervalID = null;  // Reiniciar el intervaloID cuando se detenga
     }
   </script>
 </head>
